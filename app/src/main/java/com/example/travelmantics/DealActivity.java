@@ -188,7 +188,7 @@ public class DealActivity extends AppCompatActivity {
             return;
         }
         mDatabaseReference.child(deal.getId()).removeValue();
-        Log.d("image name", deal.getImageName());
+//        Log.d("image name", deal.getImageName());
         if(deal.getImageName() != null && deal.getImageName().isEmpty() == false) {
             StorageReference picRef = FirebaseUtil.mStorage.getReference().child(deal.getImageName());
             picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
