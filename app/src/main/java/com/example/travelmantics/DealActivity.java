@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -133,19 +136,18 @@ public class DealActivity extends AppCompatActivity {
             final StorageReference ref = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
 
             UploadTask uploadTask = ref.putFile(imageUri);
-            uploadTask.addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String url = taskSnapshot.getStorage().getDownloadUrl().toString();
-                    String pictureName = taskSnapshot.getStorage().getPath();
+//            uploadTask.addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    String url = taskSnapshot.getStorage().getDownloadUrl().toString();
+//                    String pictureName = taskSnapshot.getStorage().getPath();
 //                    deal.setImageUrl(url);
-                    deal.setImageName(pictureName);
-                    Log.d("Url: ", url);
-                    Log.d("Name", pictureName);
+//                    deal.setImageName(pictureName);
+//                    Log.d("Url: ", url);
+//                    Log.d("Name", pictureName);
 //                    showImage(url);
-                }
-            });
-
+//                }
+//            });
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -163,6 +165,8 @@ public class DealActivity extends AppCompatActivity {
                         Uri downloadUri = task.getResult();
                         String url = downloadUri.toString();
                         deal.setImageUrl(url);
+                        String pictureName = downloadUri.getPath();
+                        deal.setImageName(pictureName);
                         showImage(url);
                     }
                 }

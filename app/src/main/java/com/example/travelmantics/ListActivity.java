@@ -22,6 +22,8 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        Log.d("on create", "Thats whats up");
+
 
     }
 
@@ -77,6 +79,7 @@ public class ListActivity extends AppCompatActivity {
                 new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rvDeals.setLayoutManager(dealsLayoutManager);
         FirebaseUtil.attachListener();
+
     }
 
     public void showMenu(){
