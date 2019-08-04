@@ -139,7 +139,7 @@ public class DealActivity extends AppCompatActivity {
 //            uploadTask.addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
 //                @Override
 //                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    String url = taskSnapshot.getStorage().getDownloadUrl().toString();
+//                    String url = ref.getDownloadUrl().toString();
 //                    String pictureName = taskSnapshot.getStorage().getPath();
 //                    deal.setImageUrl(url);
 //                    deal.setImageName(pictureName);
